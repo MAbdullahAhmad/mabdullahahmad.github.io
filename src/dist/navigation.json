@@ -1,0 +1,18 @@
+[
+    {
+        "label": "Portfolio",
+        "url": "/"
+    },
+    {
+        "label": "Work",
+        "url": "/work"
+    },
+    {
+        "label": "About",
+        "url": "/about"
+    },
+    {
+        "label": "Resume",
+        "url": "/resume"
+    }
+]
