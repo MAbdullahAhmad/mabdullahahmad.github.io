@@ -68,9 +68,9 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
     <ThemeProvider theme={showCustomTheme ? appTheme : defaultTheme}>
       <CssBaseline enableColorScheme />
       <ApplicationTopBar mode={mode} toggleColorMode={toggleColorMode} />
-      <Container maxWidth="lg" component="main" sx={{ my: 10, gap: 4 }}>
+      {/* <Container maxWidth="lg" component="main" sx={{ my: 10, gap: 4 }}> */}
         {children}
-      </Container>
+      {/* </Container> */}
       <Footer />
     </ThemeProvider>
   );
