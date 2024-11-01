@@ -100,7 +100,7 @@ export default function ApplicationTopBar({
 
   return (
     <AppBar
-      position="fixed"
+      position="relative"
       enableColorOnDark
       sx={{
         boxShadow: 0,
