@@ -68,6 +68,11 @@
         color: #111111;
         text-decoration: none;
       }
+
+      .subtle {
+        font-size: 0.95rem;
+        color: #aaaaaa;
+      }
     </style>
   </head>
   <body>
@@ -77,13 +82,80 @@
       <p id="message">
         The page you requested could not be found.
       </p>
+      <p class="subtle" id="detail">
+        If this path belongs to one of the public repositories, a redirect check
+        will run automatically.
+      </p>
       <a id="home-link" href="/">Back to home</a>
     </main>
     <script>
-      if (location.pathname.startsWith("/llm")) {
+      (async function () {
+        const owner = "MAbdullahAhmad";
+        const path = location.pathname.replace(/^\/+|\/+$/g, "");
+        const parts = path ? path.split("/") : [];
+        const first = parts[0];
+        const rest = parts.slice(1).join("/");
+        const message = document.getElementById("message");
+        const detail = document.getElementById("detail");
+        const homeLink = document.getElementById("home-link");
+
+        if (!first) {
+          return;
+        }
+
+        if (first.toLowerCase() === "llm") {
+          message.textContent = "Redirecting to the published LLM Tutorial path.";
+          detail.textContent = "The repository is published as /LLM/ on GitHub Pages.";
+          location.replace("/LLM/" + (rest ? rest + "/" : "") + location.search + location.hash);
+          return;
+        }
+
+        const cacheKey = "repo-case:" + owner.toLowerCase() + ":" + first.toLowerCase();
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+          location.replace("/" + cached + "/" + (rest ? rest + "/" : "") + location.search + location.hash);
+          return;
+        }
+
+        try {
+          const response = await fetch("https://api.github.com/repos/" + owner + "/" + first, {
+            headers: {
+              Accept: "application/vnd.github+json"
+            }
+          });
+
+          if (!response.ok) {
+            if (first.toLowerCase() === "llm") {
+              message.textContent = "LLM Tutorial is still being published. Please check back shortly.";
+            }
+            return;
+          }
+
+          const repo = await response.json();
+          if (!repo || !repo.name) {
+            return;
+          }
+
+          localStorage.setItem(cacheKey, repo.name);
+          message.textContent = "Found a matching public repository. Redirecting now.";
+          detail.textContent = "GitHub returned the canonical repository casing: " + repo.name;
+          location.replace("/" + repo.name + "/" + (rest ? rest + "/" : "") + location.search + location.hash);
+        } catch (error) {
+          console.error("Repository redirect lookup failed", error);
+          if (first.toLowerCase() === "llm") {
+            message.textContent = "LLM Tutorial is still being published. Please check back shortly.";
+          }
+          homeLink.textContent = "Back to home";
+        }
+      })();
+
+      if (location.pathname.startsWith("/LLM/")) {
         document.getElementById("message").textContent =
-          "LLM Tutorial is still being published. Please check back shortly.";
-        document.getElementById("home-link").textContent = "Open home page";
+          "This tutorial path exists, but the exact page you requested could not be found.";
+        document.getElementById("detail").textContent =
+          "Try the tutorial home page or check the page path again.";
+        document.getElementById("home-link").textContent = "Open tutorial home";
+        document.getElementById("home-link").href = "/LLM/";
       }
     </script>
   </body>
