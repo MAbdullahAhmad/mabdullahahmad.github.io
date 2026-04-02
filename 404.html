@@ -1,1 +1,90 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8" data-next-head=""/><meta name="viewport" content="width=device-width" data-next-head=""/><title data-next-head="">404: This page could not be found</title><link rel="preload" href="/_next/static/css/8b7a3bbba14962ca.css" as="style"/><link rel="stylesheet" href="/_next/static/css/8b7a3bbba14962ca.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" noModule="" src="/_next/static/chunks/polyfills-42372ed130431b0a.js"></script><script src="/_next/static/chunks/webpack-8bd5e56d04b29015.js" defer=""></script><script src="/_next/static/chunks/framework-88d0cc4abe8a5763.js" defer=""></script><script src="/_next/static/chunks/main-a9b1a96348420336.js" defer=""></script><script src="/_next/static/chunks/pages/_app-f45d290ef4eb0435.js" defer=""></script><script src="/_next/static/chunks/pages/_error-8c2b6ff87cd513a2.js" defer=""></script><script src="/_next/static/LwpoH6vmra7kuwQFILz8t/_buildManifest.js" defer=""></script><script src="/_next/static/LwpoH6vmra7kuwQFILz8t/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div style="font-family:system-ui,&quot;Segoe UI&quot;,Roboto,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;;height:100vh;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center"><div style="line-height:48px"><style>body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}</style><h1 class="next-error-h1" style="display:inline-block;margin:0 20px 0 0;padding-right:23px;font-size:24px;font-weight:500;vertical-align:top">404</h1><div style="display:inline-block"><h2 style="font-size:14px;font-weight:400;line-height:28px">This page could not be found<!-- -->.</h2></div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"statusCode":404}},"page":"/_error","query":{},"buildId":"LwpoH6vmra7kuwQFILz8t","nextExport":true,"isFallback":false,"gip":true,"scriptLoader":[]}</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Not Found</title>
+    <meta name="robots" content="noindex">
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: #111111;
+        color: #f3f3f3;
+      }
+
+      main {
+        width: min(720px, calc(100% - 2rem));
+        margin: 0 auto;
+        min-height: 100vh;
+        display: grid;
+        align-content: center;
+        gap: 1rem;
+        padding: 4rem 0;
+      }
+
+      .code {
+        font-size: 0.85rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #b0b0b0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.75rem);
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+
+      p {
+        margin: 0;
+        line-height: 1.75;
+        color: #d0d0d0;
+        max-width: 40rem;
+      }
+
+      a {
+        display: inline-flex;
+        width: fit-content;
+        margin-top: 0.5rem;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.8rem;
+        padding: 0.75rem 1rem;
+        border: 1px solid #f3f3f3;
+        border-radius: 0.45rem;
+        background: #f3f3f3;
+        color: #111111;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="code">404</p>
+      <h1>That page is not available.</h1>
+      <p id="message">
+        The page you requested could not be found.
+      </p>
+      <a id="home-link" href="/">Back to home</a>
+    </main>
+    <script>
+      if (location.pathname.startsWith("/llm")) {
+        document.getElementById("message").textContent =
+          "LLM Tutorial is still being published. Please check back shortly.";
+        document.getElementById("home-link").textContent = "Open home page";
+      }
+    </script>
+  </body>
+</html>
